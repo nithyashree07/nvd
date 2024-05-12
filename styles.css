@@ -1,0 +1,118 @@
+body{
+    /* background-color: #f7f7f7; */
+    /* padding: 10px 40px; */
+    cursor: pointer;
+ 
+}
+.page-loader{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: #171616;
+    z-index:1000;
+    color: #bcb8bb;
+    font-size: 30px;
+    
+}
+.lding{
+    position:absolute;
+  top: 35%;
+  left: 38%;
+}
+.spinner {
+  position: relative;
+  top: 50%;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  background-color: rgb(255, 255, 255);
+  border-radius: 100%;  
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity:0;
+}
+}
+h2{
+   padding-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    margin: 50px auto;
+    max-width: 960px;
+}
+.totalrec{
+    margin-top: -27px;
+    padding-left: 20px;
+}
+a{
+    text-decoration: none;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+table, th, td{
+    border: 1px solid #bbb;
+    text-align: left;
+}
+th{
+    background-color: #ddd;
+}
+th,td{
+    padding: 5px;
+}
+button{
+    cursor: pointer;
+}
+.tablemanager th.sorterHeader{
+    cursor : pointer;
+}
+.tablemanager th.sorterHeader:after{
+    content: '\f0dc';
+    font-family: 'FontAwesome';
+}
+.tablemanager th.sortingDesc:after{
+    content: '\f0dd';
+    font-family: 'FontAwesome';
+}
+.tablemanager th.sortingAsc:after{
+    content: '\f0de';
+    font-family: 'FontAwesome';
+}
+
+#for_numrows{
+    margin-top: 30px;
+    padding: 10px 20px;
+    float: left;
+}
+#for_filter_by{
+    margin-top: 30px;
+    padding: 10px 20px;
+    float: right;
+}
+#pagesControllers{
+    display:block;
+    padding: 0px 20px;
+    text-align: right;
+}

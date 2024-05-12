@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+    <script src="jquery-3.7.1.min.js"></script>
+
+<script src="https://kit.fontawesome.com/f27981b6a0.js" crossorigin="anonymous"></script>
+
+ <script src="table.js"></script> 
+
+</head>
+<body >
+
+    <div class="page-loader">
+        <div class="lding">
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Loading... <br/>
+            Please wait for few seconds..!
+        </div>
+        <div class="spinner">
+            
+        </div></div>
+
+    <h2>CVE LIST</h2>
+    <table class="tablemanager">
+        <thead><tr>
+            <th>CVE ID</th>
+            <th>IDENTIFIER</th>
+            <th>PUBLISHED DATE</th>
+            <th>LAST MODIFIED DATE</th>
+            <th>STATUS</th>
+        </tr>
+        </thead>
+        <tbody id="body">
+        </tbody>
+    </table>
+    <div class="totalrec">
+        <b>Total Records: 249088</b>
+    </div>
+</body>
+
+<script>
+
+$(document).ready(function() {
+    // Show loader when the page loads
+    $('.page-loader').show();
+
+
+    fetch("https://services.nvd.nist.gov/rest/json/cves/2.0")
+    .then((res) => res.json())
+    .then((data) => {
+        console.log(data)
+
+        data.vulnerabilities.forEach((vulnerabilities) => {
+            $("#body").append(
+                ` <tr>
+        <td>${vulnerabilities.cve.id}</td>
+        <td>${vulnerabilities.cve.sourceIdentifier}</td>
+        <td>${vulnerabilities.cve.published}</td>
+        <td>${vulnerabilities.cve.lastModified}</td>
+        <td>${vulnerabilities.cve.vulnStatus}</td>
+        </tr>`
+            )
+        });
+
+        $(".tablemanager").tablemanager({
+            firstSort: [
+                [3, 0],
+                [2, 0],
+                [1, "asc"],
+            ],
+
+            appendFilterby: true,
+            debug: true,
+            vocabulary:{
+                voc_filter_by: "Filter By",
+                voc_type_here_filter: "Filter...",
+                voc_show_rows: "Rows Per Page",
+            },
+            pagination: true,
+            showrows: [10, 50, 100],
+        })
+        
+            $(document).ready(function() {
+  
+  $('.tablemanager tbody tr').click(function() {
+    const cveId = $(this).find('td:first-child').text();
+    // window.location.href = `/cves/${cveId}.html`;
+    localStorage.setItem("selectedCVE", cveId);
+    window.location.href = `/CVE_2/cve.html`;
+  });
+});
+        // Hide loader after data is fetched and displayed
+        $('.page-loader').fadeOut('slow');
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+        // Handle error, e.g., show an error message
+        $('.page-loader').fadeOut('slow');
+    });
+});
+
+</script>
+
+</html>
